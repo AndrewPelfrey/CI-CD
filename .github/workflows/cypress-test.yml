@@ -18,12 +18,15 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install Dependencies
-        run: |
-          npm install
+      - name: Install Dependencies for Client
+        run: npm install
+        working-directory: ./client  
+      - name: Install Dependencies for Server
+        run: npm install
+        working-directory: ./server 
 
       - name: Run Cypress Tests
-        run: |
-          npx cypress run
+        run: npx cypress run
+        working-directory: ./cypress
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  # If you're using Cypress Dashboard
